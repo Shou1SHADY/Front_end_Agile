@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/Core/Locale/shared_pref.dart';
+import 'Core/Locale/shared_pref.dart';
+import 'Core/Network/Dio.dart';
 import 'Layout/app_root.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheHelper.init();
+  await CacheHelper.init();
+  DioHelper.init();
   runApp(const MyApp());
 }
+
+
+//dddtttttg
+//ddddd@tttttt.gg
+//dddtttttg
+///dddd@tttttt.gg
+//shaddyyy
+//shadyddofffffffsama658@gmail.com
+//dddddddddd
+//shadyddofffffsama658@gmail.com
+//shadyosama658@gmail.com
+//dddddddddd

@@ -1,6 +1,14 @@
+import 'dart:io';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import "package:flutter/material.dart";
+import 'package:localization/Core/Locale/shared_pref.dart';
 
+import '../Core/Network/Constant.dart';
+import '../Core/Network/Dio.dart';
 import '../modules/Login.dart';
+import 'app_root.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,11 +18,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<String> uploadImage(File file) async {
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "file": await MultipartFile.fromFile(file.path, filename: fileName),
+    });
+    var dio = Dio();
+    var response = await DioHelper.postForm(url: LOGIN, data: formData);
+    //await dio.post(LOGIN, data: formData);
+    return response.data['id'];
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+    String? ann1;
+    String? ann2;
+    if (CacheHelper.getData(key: "ann1") != null) {
+      ann1 = CacheHelper.getData(key: "ann1");
+    }
 
+    if (CacheHelper.getData(key: "ann2") != null) {
+      ann2 = CacheHelper.getData(key: "ann2");
+    }
     return Scaffold(
         body: Column(
       children: [
@@ -45,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                   top: 115,
                   left: 30,
                   child: Text(
-                    "JOIN US NOW",
+                    ann1 == null ? "JOIN US NOW" : ann1,
                     style: TextStyle(
                         color: Color(0xFF363F93),
                         fontWeight: FontWeight.bold,
@@ -105,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                     width: 210,
                     child: Column(children: [
                       Text(
-                        "ONCE IN A WHILE",
+                        ann2 == null ? "ONCE IN A WHILE" : ann2,
                         style: TextStyle(
                             color: Color(0xFF363F93),
                             fontWeight: FontWeight.bold),
@@ -123,7 +150,7 @@ class _HomePageState extends State<HomePage> {
             )),
         Container(
           margin: EdgeInsets.only(top: 20, left: 50),
-          height: 70,
+          height: 20,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(50), bottomLeft: Radius.circular(50)),
@@ -138,7 +165,16 @@ class _HomePageState extends State<HomePage> {
                 primary: Color(0xFF363F93),
                 shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)))),
-            onPressed: () {
+            onPressed: () async {
+              // FilePickerResult? result = await FilePicker.platform.pickFiles();
+              // late File file = File('your initial file');
+              // ;
+              // if (result != null) {
+              //   file = File(result.files.single.path!);
+              // } else {
+              //   // User canceled the picker
+              // }
+              // uploadImage(file);
               NavigateToNextScreen(context);
             },
             child: Text(
@@ -146,7 +182,25 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(
                 fontSize: 20,
               ),
-            ))
+            )),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: Color(0xFF363F93),
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)))),
+          onPressed: () {
+            // setState(() {
+            if (AppLocalizations.of(context)!.localeName == "ar") {
+              CacheHelper.saveData(key: "lang", value: "en");
+            } else {
+              CacheHelper.saveData(key: "lang", value: "ar");
+            }
+            // });
+
+            Navigator.push(context, MaterialPageRoute(builder: (_) => MyApp()));
+          },
+          child: Text(AppLocalizations.of(context)!.change_lang),
+        ),
       ],
     ));
   }
