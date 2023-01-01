@@ -6,6 +6,7 @@ import '../Core/Locale/shared_pref.dart';
 import '../Cubits/register/register_cubit.dart';
 import 'Admin/AdminMain.dart';
 import 'Login.dart';
+import 'leader/leader.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUp extends StatefulWidget {
@@ -125,6 +126,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegitserState>(
       listener: (context, state) {
+        RegisterCubit authL = RegisterCubit.get(context);
         if (state is SuccessfulDataUsers) {
           Fluttertoast.showToast(
               msg: "data loaded successfully",
@@ -134,9 +136,21 @@ class _SignUpState extends State<SignUp> {
               backgroundColor: Colors.green,
               textColor: Colors.white,
               fontSize: 16.0);
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-            return AdminMain();
-          }));
+          if (authL.reply2.type != "chef") {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) {
+              return AdminMain(nameA: authL.reply2.name as String);
+            }));
+          } else {
+            String nmyr = authL.reply2.name as String;
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) {
+              return Leader(name: nmyr);
+            }));
+          }
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
+          //   return AdminMain();
+          // }));
         }
         if (state is ErrorDataUsers) {
           Fluttertoast.showToast(

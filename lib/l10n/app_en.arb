@@ -1,4 +1,19 @@
 {
   "welcome":"welcome",
-  "change_lang": "Change_language"
+  "change_lang": "Change_language",
+  "join_us_now":"JOIN US NOW",
+  "once_in_a_while" : "ONCE IN A WHILE",
+  "dont_miss_it":"Don't miss it ",
+  "join_community": "Enter the community NOW !",
+    "join" : "JOIN",
+      "welcome" :"Welcome",
+    "money"  :"Enter minimum quantity of needed materials",
+    "submit":"Submit",
+    "subject":"Subject",
+  "subject_corr"  :"Enter Correct Subject",
+  "meal_corr"  :"Enter Correct Meal",
+   "meal" :"Meal",
+  "money_requi"  :"Money required",
+   "money_corr" :"Enter Correct Amount"
+
 }

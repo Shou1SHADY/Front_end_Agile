@@ -1,14 +1,15 @@
 import "package:flutter/material.dart";
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:localization/Layout/app_root.dart';
 import 'package:localization/models/adminTitles.dart';
 import 'package:localization/modules/Admin/announcements.dart';
 import 'package:localization/modules/Admin/preparations.dart';
 import 'package:localization/modules/Admin/reports.dart';
+import 'material.dart';
 
 class AdminMain extends StatefulWidget {
-  const AdminMain({super.key});
+  String nameA = "";
+  AdminMain({super.key, required String nameA});
 
   @override
   State<AdminMain> createState() => _AdminMainState();
@@ -22,7 +23,7 @@ class _AdminMainState extends State<AdminMain> {
         color: Colors.orangeAccent,
         title: "Announcements",
         sas: Announcements()),
-    AdminTitles(color: Colors.red, title: "Material", sas: AdminMain()),
+    AdminTitles(color: Colors.red, title: "Material", sas: Material2()),
   ];
 
   @override
@@ -31,7 +32,8 @@ class _AdminMainState extends State<AdminMain> {
       appBar: AppBar(
         backgroundColor: Color(0xFF363f93),
         title: Center(
-          child: Text(AppLocalizations.of(context)!.welcome),
+          child:
+              Text("${AppLocalizations.of(context)!.welcome} ${widget.nameA}"),
         ),
       ),
       body: Container(

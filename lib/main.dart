@@ -6,18 +6,17 @@ import 'Layout/app_root.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+
   DioHelper.init();
   runApp(const MyApp());
-}
+} 
 
+//Chef Account
+//name:ssssssss
+//email:dfddd@tttttt.gg
+//pass :ssssssss
 
-//dddtttttg
-//ddddd@tttttt.gg
-//dddtttttg
-///dddd@tttttt.gg
-//shaddyyy
-//shadyddofffffffsama658@gmail.com
-//dddddddddd
-//shadyddofffffsama658@gmail.com
-//shadyosama658@gmail.com
-//dddddddddd
+//Admin Account 
+// "name":"kerraAdmin"
+// "email":"kiro50@gmail.com"
+// "password":"123456"

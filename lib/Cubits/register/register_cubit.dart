@@ -5,6 +5,7 @@ import '../../Core/Locale/shared_pref.dart';
 import '../../Core/Network/Constant.dart';
 import '../../Core/Network/Dio.dart';
 import '../../models/Login_response.dart';
+import '../../models/loginreply.dart';
 
 part 'register_state.dart';
 
@@ -12,7 +13,7 @@ class RegisterCubit extends Cubit<RegitserState> {
   RegisterCubit() : super(RegisterInitial());
 
   static RegisterCubit get(context) => BlocProvider.of(context);
-
+  LoginReply reply2 = LoginReply();
   User users = User();
 
   void getUsers(TextEditingController _nameC, TextEditingController _emailC,
@@ -26,10 +27,11 @@ class RegisterCubit extends Cubit<RegitserState> {
       if (value.statusCode == 200) {
         //for (var i in value.data) {
 
-        users = User.fromJson(value.data);
+        //  users = User.fromJson(value.data);
 
         CacheHelper.saveData(key: "email", value: "$_emailC");
         CacheHelper.saveData(key: "password", value: "$_passC");
+        reply2 = LoginReply.fromJson(value.data);
         emit(SuccessfulDataUsers());
 
         //  }

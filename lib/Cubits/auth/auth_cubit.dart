@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/models/loginreply.dart';
 
 import '../../Core/Locale/shared_pref.dart';
 import '../../Core/Network/Constant.dart';
@@ -14,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
   static AuthCubit get(context) => BlocProvider.of(context);
 
   User users = User();
-
+  LoginReply reply1 = LoginReply();
   void LoginUsers(TextEditingController _emailC, TextEditingController _passC) {
     // if (CacheHelper.getData(key: "email") != null &&
     //     CacheHelper.getData(key: "password") != null) {
@@ -30,6 +31,9 @@ class AuthCubit extends Cubit<AuthState> {
       if (value.statusCode == 200) {
         CacheHelper.saveData(key: "email", value: "$_emailC");
         CacheHelper.saveData(key: "password", value: "$_passC");
+        // users = User.fromJson(value.data);
+        reply1 = LoginReply.fromJson(value.data);
+        //  print(reply1.name);
         emit(SuccessfulDataUsers());
       }
     })).catchError((onError) {

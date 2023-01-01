@@ -42,6 +42,7 @@ dependencies:
   fluttertoast: ^8.1.2
   new_gradient_app_bar: ^0.2.0
   shared_preferences: ^2.0.15
+  syncfusion_flutter_datepicker: ^20.4.41
 
 dev_dependencies:
   flutter_lints: ^2.0.0

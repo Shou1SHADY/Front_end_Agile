@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:localization/Cubits/leader/leader_cubit.dart';
+import 'package:localization/Cubits/material/material_cubit.dart';
+import 'package:localization/Cubits/preparations/preparations_cubit.dart';
 import 'package:localization/Cubits/register/register_cubit.dart';
 //import"package:flutter_gen/gen_l10n/"
 //import "package:flutter_gen_core/version.gen.dart";
@@ -33,8 +36,11 @@ class MyApp extends StatelessWidget {
       builder: (theme, darkTheme) => MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => DarkCubit()..getTheme()),
+          BlocProvider(create: (_) => MaterialCubit()..materialsssss()),
+          BlocProvider(create: (_) => PreparationsCubit()..taaadirss()),
           BlocProvider(create: (_) => RegisterCubit()),
           BlocProvider(create: (_) => AuthCubit()),
+          BlocProvider(create: (_) => LeaderCubit()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(360, 690),

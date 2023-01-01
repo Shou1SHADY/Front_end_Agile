@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:localization/modules/Admin/AdminMain.dart';
+import 'package:localization/modules/leader/leader.dart';
 import 'package:localization/modules/settings/setting.dart';
 import '../Core/Locale/shared_pref.dart';
 import '../Cubits/auth/auth_cubit.dart';
@@ -98,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
+        AuthCubit authL = AuthCubit.get(context);
         if (state is SuccessfulDataUsers) {
           Fluttertoast.showToast(
               msg: "data loaded successfully",
@@ -107,9 +109,25 @@ class _LoginPageState extends State<LoginPage> {
               backgroundColor: Colors.green,
               textColor: Colors.white,
               fontSize: 16.0);
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-            return const AdminMain();
-          }));
+          if (authL.reply1.type != "chef") {
+            String nmy = authL.reply1.name as String;
+            print(nmy);
+            print(nmy);
+            print(nmy);
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) {
+              return AdminMain(nameA: nmy);
+            }));
+          } else {
+            String nmy = authL.reply1.name as String;
+            print(nmy);
+            print(nmy);
+            print(nmy);
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) {
+              return Leader(name: nmy);
+            }));
+          }
         }
         if (state is ErrorDataUsers) {
           Fluttertoast.showToast(

@@ -3,11 +3,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localization/Core/Locale/shared_pref.dart';
+import 'package:localization/modules/Admin/AdminMain.dart';
+import 'package:localization/modules/Admin/reports.dart';
 
 import '../Core/Network/Constant.dart';
 import '../Core/Network/Dio.dart';
 import '../modules/Login.dart';
+import '../modules/leader/leader.dart';
 import 'app_root.dart';
 
 class HomePage extends StatefulWidget {
@@ -72,11 +76,13 @@ class _HomePageState extends State<HomePage> {
                   top: 115,
                   left: 30,
                   child: Text(
-                    ann1 == null ? "JOIN US NOW" : ann1,
+                    ann1 == null
+                        ? AppLocalizations.of(context)!.join_us_now
+                        : ann1,
                     style: TextStyle(
                         color: Color(0xFF363F93),
                         fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                        fontSize: 20.sp),
                   ))
             ],
           ),
@@ -132,17 +138,20 @@ class _HomePageState extends State<HomePage> {
                     width: 210,
                     child: Column(children: [
                       Text(
-                        ann2 == null ? "ONCE IN A WHILE" : ann2,
+                        ann2 == null
+                            ? AppLocalizations.of(context)!.once_in_a_while
+                            : ann2,
                         style: TextStyle(
                             color: Color(0xFF363F93),
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 30),
-                      Text("Don't miss it "),
+                      Text(AppLocalizations.of(context)!.dont_miss_it),
                       SizedBox(height: 10),
                       Container(
                           padding: EdgeInsets.all(5),
-                          child: Text("Enter the community NOW !"))
+                          child: Text(
+                              AppLocalizations.of(context)!.join_community))
                     ]),
                   ),
                 )
@@ -178,7 +187,7 @@ class _HomePageState extends State<HomePage> {
               NavigateToNextScreen(context);
             },
             child: Text(
-              "JOIN",
+              AppLocalizations.of(context)!.join,
               style: TextStyle(
                 fontSize: 20,
               ),
