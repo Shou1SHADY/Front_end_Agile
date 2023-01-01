@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localization/Core/Locale/shared_pref.dart';
 
 class Announcements extends StatefulWidget {
@@ -43,30 +44,41 @@ class _AnnouncementsState extends State<Announcements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        announcement(_controller1),
-        announcement(_controller2),
-        FloatingActionButton(
-            child: Icon(Icons.east),
-            backgroundColor: Colors.black45,
-            onPressed: () {
-              //////////////////////////////////////////
-              CacheHelper.saveData(
-                  key: "ann1", value: "${_controller1.value.text}");
-              CacheHelper.saveData(
-                  key: "ann2", value: "${_controller2.value.text}");
+        body: Container(
+      padding: EdgeInsets.only(top: 40.h, left: 20.w, right: 20.w),
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Column(
+        children: [
+          announcement(_controller1),
+          announcement(_controller2),
+          FloatingActionButton(
+              child: Icon(Icons.east),
+              backgroundColor: Colors.black45,
+              onPressed: () {
+                //////////////////////////////////////////
+                CacheHelper.saveData(
+                    key: "ann1", value: "${_controller1.value.text}");
+                CacheHelper.saveData(
+                    key: "ann2", value: "${_controller2.value.text}");
 
 ////////////////////////////////////////////////////////////////
-              if (_formKey1.currentState!.validate()) {
-                SnackBar snackbar = SnackBar(
-                    content: Text(
-                        "ann1 ${_controller1.value.text} \n ann2 ${_controller2.value.text}"));
+                if (_formKey1.currentState!.validate()) {
+                  SnackBar snackbar = SnackBar(
+                      content: Text(
+                          "ann1 ${_controller1.value.text} \n ann2 ${_controller2.value.text}"));
 
-                ScaffoldMessenger.of(context).showSnackBar(snackbar);
-              }
-            }),
-      ],
+                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                }
+              }),
+        ],
+      ),
     ));
   }
 }
