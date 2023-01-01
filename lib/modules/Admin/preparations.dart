@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,54 @@ class Preparation extends StatefulWidget {
 }
 
 class _PreparationState extends State<Preparation> {
+//////////////////////////////////////////////////////
+  Widget Slidee(int index) {
+    PreparationsCubit cubit = PreparationsCubit.get(context);
+    if (index == 0) {
+      return CarouselSlider(
+        options: CarouselOptions(
+          height: 190.0.h,
+          aspectRatio: 16 / 9,
+          viewportFraction: 0.8,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 3),
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enlargeCenterPage: true,
+          scrollDirection: Axis.horizontal,
+        ),
+        items: [
+          "assets/images/Behind-the-Scenes.png",
+          "assets/images/c72643b0c16a8e921a8d79670f20f7b3.jpg",
+          "assets/images/oldtimer-tunnel-ad.jpg",
+        ].map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0.w),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill, image: AssetImage(i))),
+
+                // child: Text(
+                //   'text $i',
+                //   style: TextStyle(fontSize: 16.0),
+                // )
+              );
+            },
+          );
+        }).toList(),
+      );
+    } else
+      return SizedBox();
+  }
+
+//////////////////////////////////////////////////
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PreparationsCubit, PreparationsState2>(
@@ -52,77 +101,74 @@ class _PreparationState extends State<Preparation> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: ListView.builder(
-                      itemCount: cubit.ta7dirs.length,
-                      itemBuilder: ((context, index) {
-                        return Column(
-                          children: [
-                            ListTile(
-                              title: Column(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: cubit.ta7dirs.length,
+                            itemBuilder: ((context, index) {
+                              return Column(
                                 children: [
-                                  Text(cubit.ta7dirs[index].preparationDetails!
-                                      .subject
-                                      .toString()),
-                                  Text(cubit.ta7dirs[index].chef!.name
-                                      .toString())
+                                  Slidee(index),
+                                  SizedBox(height: 20.h),
+                                  ListTile(
+                                    title: Column(
+                                      children: [
+                                        Text(
+                                            "Subject: ${cubit.ta7dirs[index].preparationDetails!.subject.toString()}"),
+                                        Text(
+                                            "Leader name: ${cubit.ta7dirs[index].chef!.name.toString()}")
+                                      ],
+                                    ),
+                                    subtitle: Column(children: [
+                                      Text(
+                                          "Leader Email: ${cubit.ta7dirs[index].chef!.email.toString()}")
+                                    ]),
+                                    trailing: SizedBox(
+                                      width: 160,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "Money needed: ${cubit.ta7dirs[index].preparationDetails!.money.toString()}",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                  "Meal prepared: ${cubit.ta7dirs[index].preparationDetails!.meal.toString()}",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Text(
+                                                  "Materials quantity: ${cubit.ta7dirs[index].preparationDetails!.materiels![0].quantity.toString()}",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Text(
+                                                  "Materials name: ${cubit.ta7dirs[index].preparationDetails!.materiels![0].title.toString()}",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const Divider(),
                                 ],
-                              ),
-                              subtitle: Column(children: [
-                                Text(
-                                    cubit.ta7dirs[index].chef!.email.toString())
-                                // Text("Room name: ${kids[index].address}",
-                                //     style: TextStyle(fontSize: 12.sp)),
-                                // Text(
-                                //   "Status: ${kids[index].status}",
-                                //   style: TextStyle(fontSize: 12.sp),
-                                // )
-                              ]),
-                              leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(cubit
-                                      .ta7dirs[index]
-                                      .preparationDetails!
-                                      .materiels![index]
-                                      .imageUrl
-                                      .toString())),
-                              trailing: SizedBox(
-                                width: 150,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(cubit.ta7dirs[index]
-                                            .preparationDetails!.money
-                                            .toString()),
-                                        Text(cubit.ta7dirs[index]
-                                            .preparationDetails!.meal
-                                            .toString()),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(cubit
-                                            .ta7dirs[index]
-                                            .preparationDetails!
-                                            .materiels![index]
-                                            .quantity
-                                            .toString()),
-                                        Text(cubit
-                                            .ta7dirs[index]
-                                            .preparationDetails!
-                                            .materiels![index]
-                                            .title
-                                            .toString()),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Divider(),
-                          ],
-                        );
-                      }),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 : Center(

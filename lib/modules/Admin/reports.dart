@@ -38,43 +38,51 @@ class _ReportsState extends State<Reports> {
           title: const Center(child: Text("Reports")),
           backgroundColor: const Color(0xFF363f93),
         ),
-        body: Column(
-          children: [
-            Container(
-                margin: EdgeInsets.only(left: 2.w, top: 100.h),
-                child: Text(
-                  "Upload your Files here",
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
-                )),
-            Container(
-              child: InkWell(
-                onTap: () async {
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles();
-                  late File file = File('your initial file');
-                  ;
-                  if (result != null) {
-                    file = File(result.files.single.path!);
-                  } else {
-                    print("ERRRRROR");
-                    // User canceled the picker
-                  }
-                  uploadImage(file);
-                },
-                child: Container(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 70.w, vertical: 20.h),
-                  height: 200.h,
-                  width: 250.w,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage("assets/images/download.png"))),
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(left: 2.w, top: 100.h),
+                  child: Text(
+                    "Upload your Files here",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
+                  )),
+              Container(
+                child: InkWell(
+                  onTap: () async {
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles();
+                    late File file = File('your initial file');
+                    ;
+                    if (result != null) {
+                      file = File(result.files.single.path!);
+                    } else {
+                      print("ERRRRROR");
+                      // User canceled the picker
+                    }
+                    uploadImage(file);
+                  },
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 70.w, vertical: 20.h),
+                    height: 200.h,
+                    width: 250.w,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage("assets/images/download.png"))),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

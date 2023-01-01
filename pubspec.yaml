@@ -31,6 +31,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.0
   badges: ^2.0.3
   bloc: ^8.1.0
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   file_picker: ^5.2.4

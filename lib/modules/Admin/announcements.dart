@@ -30,7 +30,7 @@ class _AnnouncementsState extends State<Announcements> {
         }),
         decoration: InputDecoration(
           suffixIcon: Icon(
-            Icons.email,
+            Icons.speaker,
             color: IconTheme.of(context).color,
           ),
           border: OutlineInputBorder(),
@@ -56,8 +56,16 @@ class _AnnouncementsState extends State<Announcements> {
       ),
       child: Column(
         children: [
+          Image.asset(
+            "assets/images/59284.png",
+            height: 200.h,
+            width: 200.w,
+          ),
           announcement(_controller1),
           announcement(_controller2),
+          SizedBox(
+            height: 30.h,
+          ),
           FloatingActionButton(
               child: Icon(Icons.east),
               backgroundColor: Colors.black45,
